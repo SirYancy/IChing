@@ -81,9 +81,11 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun IChingTheme(content: @Composable () -> Unit) {
+fun IChingTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = LightColors,
+        colorScheme = if(darkTheme) DarkColors else LightColors,
         typography = Typography,
         content = content
     )
