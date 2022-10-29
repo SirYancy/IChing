@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -44,12 +45,36 @@ fun Oracle(
     ) {
         YarrowStalks()
     }
+//    Row(modifier = modifier.fillMaxWidth()){
+//        OraclePanel()
+//        HexDisplay()
+//    }
 }
+
+//@Composable
+//fun HexDisplay() {
+//    TODO("Not yet implemented")
+//}
+//
+//@Composable
+//fun OraclePanel() {
+//    TODO("Not yet implemented")
+//}
 
 @Composable
 fun YarrowStalks(
     modifier: Modifier = Modifier,
 ){
+    Row(
+        modifier.padding(1.dp),
+        horizontalArrangement = Arrangement.Center,
+    ){
+        Image(
+            modifier = modifier.weight(1f),
+            painter = painterResource(id = R.drawable.stalk_r),
+            contentDescription = null,
+        )
+    }
     Row (
         modifier.padding(10.dp)
     ) {
@@ -73,7 +98,9 @@ fun YarrowStalk(
             .clickable(
                 enabled = true,
                 onClick = {
-                    Toast.makeText(context, "$index clicked", Toast.LENGTH_SHORT).show()
+                    Toast
+                        .makeText(context, "$index clicked", Toast.LENGTH_SHORT)
+                        .show()
                 }
             ),
         painter = painterResource(id = R.drawable.stalk_n),
