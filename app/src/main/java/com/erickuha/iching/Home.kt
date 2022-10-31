@@ -36,7 +36,7 @@ fun Home(modifier: Modifier = Modifier){
 fun OracleActivity(
     modifier: Modifier = Modifier,
 ) {
-    val oracle = Oracle()
+    var oracle by remember { mutableStateOf( Oracle() )}
     Column(modifier = modifier.fillMaxWidth()) {
         Row(modifier = modifier.fillMaxWidth()) {
             YarrowStalks(modifier, oracle)
