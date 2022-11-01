@@ -1,6 +1,7 @@
 package com.erickuha.iching
 
 import android.content.res.Configuration
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -19,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.erickuha.iching.oracle.Line
 import com.erickuha.iching.oracle.Oracle
 import com.erickuha.iching.ui.theme.IChingTheme
+
+private const val TAG = "Home Activity"
 
 @Composable
 fun Home(modifier: Modifier = Modifier){
@@ -63,6 +66,7 @@ fun HexDisplay(
     modifier: Modifier = Modifier,
     oracle: Oracle
 ) {
+    LogCompositions(tag = TAG, msg = "HexDisplay")
     Surface() {
         Column(
             modifier = modifier.fillMaxWidth(),
@@ -147,6 +151,7 @@ fun YarrowStalks(
                                     val oldPile = piles[0] - it
                                     piles.add(it)
                                     piles[0] = oldPile
+                                    Log.d(TAG, "piles updated: ${piles[0]}")
                                 }
                             )
                         }
@@ -232,5 +237,18 @@ fun OraclePreview(){
 fun OnBoardingPreview(){
     IChingTheme {
         Home()
+    }
+}
+
+class Ref(var value: Int)
+
+@Composable
+inline fun LogCompositions(tag: String, msg: String){
+    if(BuildConfig.DEBUG){
+        val ref = remember {Ref(0)}
+        SideEffect {
+            ref.value++
+        }
+        Log.d(tag, "Compositions: $msg ${ref.value}")
     }
 }

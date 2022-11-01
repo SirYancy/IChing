@@ -3,6 +3,7 @@ package com.erickuha.iching.oracle
 import android.util.Log
 
 class Oracle {
+    private val TAG = "Oracle"
 
     private var divisions = arrayOf(0, 0, 0)
     var divisionIndex = 0
@@ -34,25 +35,26 @@ class Oracle {
     }
 
     fun divideStalks(index: Int): Int{
-        Log.i("Oracle", "$index is passed")
-        val universe = (-3..3).random()
-        var right = (index + universe).coerceIn(5,this.piles[0]-5)
+        Log.d(TAG, "$index is passed")
+        val universe = 0 // TODO = (-3..3).random()
+        var right = index // TODO (index + universe).coerceIn(5,this.piles[0]-5)
         var left = this.piles[0]- right
 
 
         var remainder = 0
         remainder++
         right--
-        remainder += right % 4
-        remainder += left % 4
+        remainder += specialModulus(right)
+        remainder += specialModulus(left)
         piles[pilesIndex] = remainder
         pilesIndex++
+        Log.d("Oracle", "Remainder: $remainder")
 
         if (remainder == 9 || remainder == 8){
-            this.divisions[divisionIndex] = 3
+            this.divisions[divisionIndex] = 2
             this.divisionIndex++
         } else if (remainder == 5 || remainder == 4){
-            this.divisions[divisionIndex] = 2
+            this.divisions[divisionIndex] = 3
             this.divisionIndex++
         } else {
             throw Error("Invalid Remainder - I Ching Oracle is displeased")
@@ -66,8 +68,13 @@ class Oracle {
             currentIndex++
             this.reset()
         }
+        Log.d("Oracle", "Remainder is $remainder")
         return remainder
     }
 
+    fun specialModulus(number: Int): Int {
+        val remainder = number % 4
+        return if(remainder == 0) 4 else remainder
+    }
 
 }
