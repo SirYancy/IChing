@@ -10,7 +10,7 @@ class Oracle {
         private set
     var piles = arrayOf(49,0,0,0)
         private set
-    var pilesIndex = 0
+    var pilesIndex = 1
         private set
     var lines = arrayOf(
         Line.UNDEFINED,
@@ -36,8 +36,8 @@ class Oracle {
 
     fun divideStalks(index: Int): Int{
         Log.d(TAG, "$index is passed")
-        val universe = 0 // TODO = (-3..3).random()
-        var right = index // TODO (index + universe).coerceIn(5,this.piles[0]-5)
+        val universe = (-3..3).random()
+        var right = (index + universe).coerceIn(5,this.piles[0]-5)
         var left = this.piles[0]- right
 
 
@@ -47,6 +47,7 @@ class Oracle {
         remainder += specialModulus(right)
         remainder += specialModulus(left)
         piles[pilesIndex] = remainder
+        piles[0] -= remainder
         pilesIndex++
         Log.d("Oracle", "Remainder: $remainder")
 
@@ -72,7 +73,7 @@ class Oracle {
         return remainder
     }
 
-    fun specialModulus(number: Int): Int {
+    private fun specialModulus(number: Int): Int {
         val remainder = number % 4
         return if(remainder == 0) 4 else remainder
     }

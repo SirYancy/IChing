@@ -110,10 +110,11 @@ fun YarrowStalks(
     modifier: Modifier = Modifier,
     oracle: Oracle,
 ){
-    var piles = remember { mutableListOf<Int>() }
+    var piles = remember { mutableStateListOf<Int>() }
     if (piles.isEmpty()){
-        piles.add(49)
+        piles.add(40)
     }
+    LogCompositions(tag = TAG, msg = "YarrowStalks" )
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
