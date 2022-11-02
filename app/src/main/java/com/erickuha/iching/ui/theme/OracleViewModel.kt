@@ -1,9 +1,7 @@
 package com.erickuha.iching.ui.theme
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.erickuha.iching.oracle.Line
 import com.erickuha.iching.oracle.Oracle
