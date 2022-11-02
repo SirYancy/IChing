@@ -11,9 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             IChingTheme {
-                Surface {
-                    Home()
-                }
+                Home()
             }
         }
     }

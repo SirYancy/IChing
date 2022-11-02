@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">I Ching</string>
+    <string name="i_ching_oracle">The I Ching Oracle</string>
+    <string name="continue_text">Continue</string>
 </resources>

@@ -1,14 +1,14 @@
 package com.erickuha.iching.oracle
 
 enum class Trigram (val trigramNumber: Int){
-    HEAVEN(1),
-    THUNDER(2),
-    WATER(3),
+    HEAVEN(7),
+    THUNDER(6),
+    WATER(5),
     MOUNTAIN(4),
-    EARTH(5),
-    WIND(6),
-    FLAME(7),
-    LAKE(8);
+    EARTH(3),
+    WIND(2),
+    FLAME(2),
+    LAKE(1);
 
     companion object {
         private val map = Trigram.values().associateBy { it.trigramNumber}

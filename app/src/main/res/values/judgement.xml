@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="force">
+        <item>1</item>
+        <item>Initiating</item>
+        <item>䷀</item>
+        <item>Vast is the great and originating power indicated by Ch\'ien! All things owe to it their beginning: it contains all the meanings belonging to the name heaven.
+The clouds move and the rain is distributed; the various things appear in their developed forms.
+The sages grandly understand the connection between the end and the beginning, and how the indications of the six lines in the hexagram are accomplished, each in its season. Accordingly they mount the carriage drawn by those six dragons at the proper times, and drive through the sky.
+The method of Ch'ien is to change and transform, so that everything obtains its correct nature as appointed by the mind of Heaven; and thereafter the conditions of great harmony are preserved in union. The result is 'what is advantageous, and correct and firm.'
+The sage appears aloft, high above all things, and the myriad states all enjoy repose.</item>
+    </string-array>
+    <string-array name="field">
+        <item>2</item>
+        <item>Responding</item>
+        <item>䷁</item>
+        <item>Complete is the great and originating capacity indicated by K\'un! All things owe to it their birth; it receives obediently the influences of Heaven.
+K\'un, in its largeness, supports and contains all things. Its excellent capacity matches the unlimited power of Ch\'ien.
+Its comprehension is wide, and its brightness great. The various things obtain by it their full development.
+The mare is a creature of earthly kind. Its power of moving on the earth is without limit; it is mild and docile, advantageous and firm: such is the course of the superior man.
+If he take the initiative, he goes astray: he misses, that is, his proper course. If he follow, he is docile, and gets into his regular course. In the southwest he will get friends: he will be walking with those of his own class. In the northeast he will lose friends: but in the end there will be ground for congratulation.
+The good fortune arising from resting in firmness corresponds to the unlimited capacity of the earth.
+</item>
+    </string-array>
+    <string-array name="sprouting">
+        <item>3</item>
+        <item>Beginning</item>
+        <item>䷂</item>
+        <item>In Chun we have the strong Ch\'ien and the weak K\'un commencing their intercourse, and difficulties arising.
+Movement in the midst of peril gives rise to great progress and success, through firm correctness.
+By the action of the thunder and rain, which are symbols of Chên and K\'an, all between Heaven and Earth is filled up. But the condition of the time is full of irregularity and obscurity.
+Feudal princes should be established, but the feeling that rest and peace have been secured should not be indulged even then.
+</item>
+    </string-array>
+    <string-array name="enveloping">
+        <item>4</item>
+        <item>Childhood</item>
+        <item>䷃</item>
+        <item>In Mêng we have the trigram for a mountain, and below it that of a rugged defile with a stream in it. The conditions of peril and arrest of progress suggested by these give the idea in Mêng.
+Mêng indicates that there will be progress and success: for there is development at work in it, and its time of action is exactly what is right. \'I do not seek the youthful and inexperienced; he seeks me:\' so does will respond to will.
+When he shows the sincerity that marks the first recourse to divination, I instruct him: for possessing the qualities of the undivided line and being in the central place, the subject of the second line thus speaks.
+A second and third application create annoyance, and I do not instruct so as to create annoyance, annoyance he means to the ignorant.
+The method of dealing with the young and ignorant is to nourish the correct nature belonging to them; this accomplishes the service of the sage.
+</item>
+    </string-array>
+    <string-array ></string-array>
+</resources>

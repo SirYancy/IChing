@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -18,8 +19,8 @@ private const val TAG = "Home Activity"
 @Composable
 fun Home(modifier: Modifier = Modifier){
     var showOnboarding by rememberSaveable{ mutableStateOf(true) }
-    Surface(modifier, color = MaterialTheme.colorScheme.background){
-        if (showOnboarding){
+    Surface{
+        if (showOnboarding) {
             OnboardingScreen(onContinueClicked = { showOnboarding = false })
         } else {
             OracleActivity()
@@ -32,7 +33,7 @@ fun OracleActivity(
     modifier: Modifier = Modifier,
     oracleViewModel: OracleViewModel = viewModel()
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = modifier.fillMaxWidth()) {
             YarrowStalks(
                 modifier,
@@ -66,20 +67,20 @@ fun OracleActivity(
 
 @Composable
 fun OnboardingScreen(
-    onContinueClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onContinueClicked: () -> Unit
 ){
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = "The I Ching Oracle")
+        Text(text = stringResource(R.string.i_ching_oracle))
         Button(
             modifier = Modifier.padding(vertical = 24.dp),
             onClick = onContinueClicked
         ){
-            Text("Continue")
+            Text(stringResource(R.string.continue_text))
         }
     }
 }
