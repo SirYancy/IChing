@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -130,4 +131,10 @@ inline fun LogCompositions(tag: String, msg: String){
         }
         Log.d(tag, "Compositions: $msg ${ref.value}")
     }
+}
+
+@Composable
+fun getStringResourceByName(aString: String): Int {
+    val context = LocalContext.current
+    return context.resources.getIdentifier(aString, "string-array", context.packageName)
 }
