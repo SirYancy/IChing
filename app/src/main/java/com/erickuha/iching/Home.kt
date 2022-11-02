@@ -13,26 +13,54 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.erickuha.iching.oracle.Hexagram
 import com.erickuha.iching.ui.theme.*
 
 private const val TAG = "Home Activity"
+private const val ONBOARDING_STATE = 100
+private const val READING_STATE = 200
+private const val RESOLUTION_STATE = 300
 
 @Composable
 fun Home(modifier: Modifier = Modifier){
-    var showOnboarding by rememberSaveable{ mutableStateOf(true) }
+    var state by rememberSaveable{ mutableStateOf(ONBOARDING_STATE) }
+    var hexagramOne by rememberSaveable { mutableStateOf(Hexagram.UNDEFINED) }
+    var hexagramTwo by rememberSaveable { mutableStateOf(Hexagram.UNDEFINED) }
     Surface{
-        if (showOnboarding) {
-            OnboardingScreen(onContinueClicked = { showOnboarding = false })
-        } else {
-            OracleActivity()
+        when (state) {
+            ONBOARDING_STATE -> {
+                OnboardingScreen(onContinueClicked = { state = READING_STATE })
+            }
+            READING_STATE -> {
+                OracleActivity(onReadingComplete = {
+                        firstHex, secondHex ->
+                    hexagramOne = firstHex
+                    hexagramTwo = secondHex
+                })
+            }
+            RESOLUTION_STATE -> {
+                OracleResultActivity()
+            }
+            else -> {
+                throw Error("Invalid State Error")
+            }
         }
     }
 }
 
 @Composable
+fun OracleResultActivity(
+    modifier: Modifier = Modifier,
+
+){
+
+}
+
+@Composable
 fun OracleActivity(
     modifier: Modifier = Modifier,
-    oracleViewModel: OracleViewModel = viewModel()
+    oracleViewModel: OracleViewModel = viewModel(),
+    onReadingComplete: (Hexagram, Hexagram) -> Unit
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = modifier.fillMaxWidth()) {
@@ -53,7 +81,8 @@ fun OracleActivity(
             ){
                 HexDisplay(
                     modifier,
-                    oracleViewModel.getLines()
+                    oracleViewModel.getLines(),
+                    onReadingComplete,
                 )
             }
             Box(
@@ -102,7 +131,9 @@ fun OnboardingScreen(
 @Composable
 fun OraclePreview(){
     IChingTheme {
-        OracleActivity()
+        OracleActivity(onReadingComplete = {
+            _, _ ->
+        })
     }
 }
 
@@ -119,6 +150,8 @@ fun OnBoardingPreview(){
         Home()
     }
 }
+
+/** -------------- HELPERS ------------------------*/
 
 class Ref(var value: Int)
 

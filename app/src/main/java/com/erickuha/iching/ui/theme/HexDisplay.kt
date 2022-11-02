@@ -9,12 +9,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.erickuha.iching.R
+import com.erickuha.iching.oracle.Hexagram
 import com.erickuha.iching.oracle.Line
 
 @Composable
 fun HexDisplay(
     modifier: Modifier = Modifier,
     lines: List<Line>,
+    onReadingComplete: (Hexagram, Hexagram) -> Unit
 ) {
     Surface() {
         Column(
