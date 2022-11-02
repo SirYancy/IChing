@@ -25,6 +25,7 @@ fun YarrowStalks(
     modifier: Modifier = Modifier,
     onYarrowSelected: (Int) -> Unit,
     getYarrowPiles: () -> List<Int>,
+    isReadingComplete: Boolean,
 ){
     Card(
         colors = CardDefaults.cardColors(
@@ -45,7 +46,10 @@ fun YarrowStalks(
         Row(
             modifier.padding(10.dp)
         ) {
-            var makeClickable = true
+            var makeClickable = false
+            if(!isReadingComplete) {
+                makeClickable = true
+            }
             val piles = getYarrowPiles()
             for(pile in piles){
                 Box(

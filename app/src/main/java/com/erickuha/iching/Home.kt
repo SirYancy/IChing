@@ -24,6 +24,7 @@ private const val RESOLUTION_STATE = 300
 @Composable
 fun Home(modifier: Modifier = Modifier){
     var state by rememberSaveable{ mutableStateOf(ONBOARDING_STATE) }
+    var isReadingComplete by rememberSaveable { mutableStateOf(false) }
     var hexagramOne by rememberSaveable { mutableStateOf(Hexagram.UNDEFINED) }
     var hexagramTwo by rememberSaveable { mutableStateOf(Hexagram.UNDEFINED) }
     Surface{
@@ -32,7 +33,9 @@ fun Home(modifier: Modifier = Modifier){
                 OnboardingScreen(onContinueClicked = { state = READING_STATE })
             }
             READING_STATE -> {
-                OracleActivity(onReadingComplete = {
+                OracleActivity(
+                    isReadingComplete = isReadingComplete,
+                    onReadingComplete = {
                         firstHex, secondHex ->
                     hexagramOne = firstHex
                     hexagramTwo = secondHex
@@ -59,6 +62,7 @@ fun OracleResultActivity(
 @Composable
 fun OracleActivity(
     modifier: Modifier = Modifier,
+    isReadingComplete: Boolean,
     oracleViewModel: OracleViewModel = viewModel(),
     onReadingComplete: (Hexagram, Hexagram) -> Unit
 ) {
@@ -71,7 +75,8 @@ fun OracleActivity(
                 },
                 getYarrowPiles = {
                     oracleViewModel.getPiles()
-                }
+                },
+                isReadingComplete = isReadingComplete,
             )
         }
         Row(modifier = modifier.fillMaxWidth()) {
@@ -89,7 +94,9 @@ fun OracleActivity(
                 modifier = Modifier
                     .weight(1f)
             ){
-                OraclePanel()
+                OraclePanel(
+                    isReadingComplete = isReadingComplete
+                )
             }
         }
     }
@@ -131,9 +138,11 @@ fun OnboardingScreen(
 @Composable
 fun OraclePreview(){
     IChingTheme {
-        OracleActivity(onReadingComplete = {
-            _, _ ->
-        })
+        OracleActivity(
+            onReadingComplete = {
+                _, _ -> },
+            isReadingComplete = false
+        )
     }
 }
 
