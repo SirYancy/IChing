@@ -54,8 +54,8 @@ fun HexDisplay(
 }
 
 fun buildHexagram(lines: List<Line>): Hexagram {
-    val lower = getTrigram(listOf(lines[0], lines[1], lines[2]))
-    val upper = getTrigram(listOf(lines[3], lines[4], lines[5]))
+    val lower = getTrigram(listOf(lines[2], lines[1], lines[0]))
+    val upper = getTrigram(listOf(lines[5], lines[4], lines[3]))
     return getHexagram(upper, lower)
 }
 
