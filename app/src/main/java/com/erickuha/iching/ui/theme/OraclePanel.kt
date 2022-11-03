@@ -16,6 +16,7 @@ import com.erickuha.iching.R
 fun OraclePanel(
     modifier: Modifier = Modifier,
     isReadingComplete: Boolean,
+    onResultRequested: () -> Unit,
 ) {
     Surface() {
         Column(
@@ -28,7 +29,7 @@ fun OraclePanel(
                 Text(text = stringResource(R.string.reading_complete))
                 Button(
                     onClick = {
-
+                        onResultRequested()
                     }
                 ){
                     Text(text = stringResource(id = R.string.continue_text))
@@ -44,7 +45,8 @@ fun OraclePanel(
 fun OraclePanelPreview(){
     IChingTheme {
         OraclePanel(
-            isReadingComplete = true
+            isReadingComplete = true,
+            onResultRequested = {}
         )
     }
 }

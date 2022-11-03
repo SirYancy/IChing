@@ -39,10 +39,19 @@ fun Home(modifier: Modifier = Modifier){
                         firstHex, secondHex ->
                     hexagramOne = firstHex
                     hexagramTwo = secondHex
-                })
+                    isReadingComplete = true
+                    },
+                    onResultRequested = {
+                        state = RESOLUTION_STATE
+                    }
+                )
             }
             RESOLUTION_STATE -> {
-                OracleResultActivity()
+                OracleResultActivity(
+                    modifier,
+                    hexagramOne,
+                    hexagramTwo
+                )
             }
             else -> {
                 throw Error("Invalid State Error")
@@ -52,19 +61,12 @@ fun Home(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun OracleResultActivity(
-    modifier: Modifier = Modifier,
-
-){
-
-}
-
-@Composable
 fun OracleActivity(
     modifier: Modifier = Modifier,
     isReadingComplete: Boolean,
     oracleViewModel: OracleViewModel = viewModel(),
-    onReadingComplete: (Hexagram, Hexagram) -> Unit
+    onReadingComplete: (Hexagram, Hexagram) -> Unit,
+    onResultRequested: () -> Unit,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = modifier.fillMaxWidth()) {
@@ -95,7 +97,8 @@ fun OracleActivity(
                     .weight(1f)
             ){
                 OraclePanel(
-                    isReadingComplete = isReadingComplete
+                    isReadingComplete = isReadingComplete,
+                    onResultRequested = onResultRequested,
                 )
             }
         }
@@ -141,7 +144,8 @@ fun OraclePreview(){
         OracleActivity(
             onReadingComplete = {
                 _, _ -> },
-            isReadingComplete = false
+            isReadingComplete = false,
+            onResultRequested = {}
         )
     }
 }

@@ -46,7 +46,7 @@ fun HexDisplay(
                         isMoving = true
                 }
                 val hexagram = buildHexagram(lines)
-                val movingHexagram = if(isMoving) buildHexagram(lines) else Hexagram.UNDEFINED
+                val movingHexagram = if(isMoving) buildHexagram(movingLines) else Hexagram.UNDEFINED
                 onReadingComplete(hexagram, movingHexagram)
             }
         }

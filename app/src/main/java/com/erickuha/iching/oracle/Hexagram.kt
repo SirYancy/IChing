@@ -2,7 +2,7 @@ package com.erickuha.iching.oracle
 
 import com.erickuha.iching.R
 
-enum class Hexagram (val hexagramNumber: Int, resId: Int) {//val textName: String){
+enum class Hexagram (val hexagramNumber: Int, val resId: Int) {//val textName: String){
     UNDEFINED(0, 0),
     FORCE(1, R.array.force),
     FIELD(2, R.array.field),

@@ -4,4 +4,6 @@
     <string name="continue_text">Continue</string>
     <string name="reading_complete">Reading Complete</string>
     <string name="select_a_stalk">Select a stalk</string>
+    <string name="your_hex_string">Your hexagram</string>
+    <string name="moving_to_string">…moving to</string>
 </resources>
