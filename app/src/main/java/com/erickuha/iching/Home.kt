@@ -2,80 +2,30 @@ package com.erickuha.iching
 
 import android.content.res.Configuration
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Dataset
+import androidx.compose.material.icons.filled.FormatAlignJustify
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.erickuha.iching.oracle.Hexagram
 import com.erickuha.iching.ui.theme.*
 
 private const val TAG = "Home Activity"
 private const val ONBOARDING_STATE = 100
-private const val READING_STATE = 200
+private const val READING_YARROW_STATE = 200
 private const val RESOLUTION_STATE = 300
+private const val EXPLORE_STATE = 400
 
-val colors = listOf(
-    Color(0xFFffd7d7.toInt()),
-    Color(0xFFffe9d6.toInt()),
-    Color(0xFFfffbd0.toInt()),
-    Color(0xFFe3ffd9.toInt()),
-    Color(0xFFd0fff8.toInt())
-)
-
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
-@Composable
-fun LayoutTest(modifier: Modifier = Modifier){
-    Scaffold(
-        topBar = {
-            TopAppBar (
-                title = { Text("Scaffold Test")},
-                navigationIcon = {
-                    IconButton(
-                        onClick = {/* TODO */}
-                    ){
-                        Icon(Icons.Filled.Menu, contentDescription = "Navigation")
-                    }
-                }
-            )
-        },
-        floatingActionButtonPosition = FabPosition.End,
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = { /*TODO*/ }) {
-                Text("Inc")
-            }
-        },
-        content = { innerPadding ->
-            LazyColumn(
-                modifier = Modifier.consumedWindowInsets(innerPadding),
-                contentPadding = innerPadding
-            ) {
-                items(count = 100){
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .background(colors[it % colors.size])
-                    )
-                }
-            }
-        }
-
-    )
-}
 
 
 @Composable
@@ -87,9 +37,11 @@ fun Home(modifier: Modifier = Modifier){
     Surface{
         when (state) {
             ONBOARDING_STATE -> {
-                OnboardingScreen(onContinueClicked = { state = READING_STATE })
+                OnboardingScreen(modifier, onMenuSelected = {
+                    newState -> state = newState
+                })
             }
-            READING_STATE -> {
+            READING_YARROW_STATE -> {
                 OracleActivity(
                     isReadingComplete = isReadingComplete,
                     onReadingComplete = {
@@ -109,6 +61,9 @@ fun Home(modifier: Modifier = Modifier){
                     hexagramOne,
                     hexagramTwo
                 )
+            }
+            EXPLORE_STATE -> {
+                /* TODO */
             }
             else -> {
                 throw Error("Invalid State Error")
@@ -165,19 +120,45 @@ fun OracleActivity(
 @Composable
 fun OnboardingScreen(
     modifier: Modifier = Modifier,
-    onContinueClicked: () -> Unit
+    onMenuSelected: (Int) -> Unit
 ){
+    var selectedItem by remember {mutableStateOf(0)}
+    val items = listOf(
+        "Explore",
+        "Yarrow")
+    val icons = listOf(
+        Icons.Filled.Dataset,
+        Icons.Filled.FormatAlignJustify)
+    val states = listOf(
+        EXPLORE_STATE,
+        READING_YARROW_STATE
+    )
+    val index = (1..64).random()
+    val hex = Hexagram[index]
+    val hexTextArray = stringArrayResource(id = hex!!.resId)
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = stringResource(R.string.i_ching_oracle))
-        Button(
-            modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueClicked
-        ){
-            Text(stringResource(R.string.continue_text))
+        Text(
+            text = stringResource(R.string.i_ching_oracle),
+            fontSize = 30.sp
+        )
+        Text(
+            text = hexTextArray[2],
+            fontSize = 100.sp
+        )
+
+        NavigationBar {
+            items.forEachIndexed { index, item ->
+                NavigationBarItem(
+                    icon = { Icon(icons[index], contentDescription = null)},
+                    label = { Text(item) },
+                    selected = selectedItem == index,
+                    onClick = { onMenuSelected(states[index]) }
+                )
+            }
         }
     }
 }
@@ -218,20 +199,6 @@ fun OraclePreview(){
 fun OnBoardingPreview(){
     IChingTheme {
         Home()
-    }
-}
-
-@Preview(
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    widthDp = 320,
-    heightDp = 320,
-    name = "Dark")
-@Preview(showBackground = true, widthDp = 320, heightDp = 320)
-@Composable
-fun LayoutTestPreview(){
-    IChingTheme {
-        LayoutTest()
     }
 }
 
